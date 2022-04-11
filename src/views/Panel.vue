@@ -1,64 +1,41 @@
-<script lang="ts">
-import { defineComponent } from "vue";
-import Toggle from "@/components/Toggle.vue";
-export default defineComponent({
-  data() {
-    return {};
-  },
-
-  components: {
-    Toggle,
-  },
-
-  methods: {
-    changeScene(sceneName: string, mute = false) {
-      const data = {
-        instructions: {
-          setScene: sceneName,
-          mute: [
-            {
-              item: "Mic main",
-              status: mute,
-            },
-          ],
-        },
-      };
-      this.axios
-        .post("http://localhost:8081/api/obs/change-items", data)
-        .then((response) => {
-          console.log(response.data);
-        });
-    },
-    twitchChat(message: string) {
-      this.axios
-        .post("http://localhost:8081/api/obs/twitch-chat", { message })
-        .then((response) => {
-          console.log(response.data);
-        });
-    },
-    streamEnding() {
-      const data = {
-        instructions: {
-          setScene: "Stream ending",
-          mute: [
-            {
-              item: "Mic main",
-              status: true,
-            },
-          ],
-        },
-      };
-      this.axios
-        .post("http://localhost:8081/api/obs/change-items", data)
-        .then((response) => {
-          console.log(response.data);
-        });
-    },
-  },
-});
-</script>
 <template>
   <div class="w-full h-20 my-10">
+    <div class="card shadow-xl bg-neutral w-full mb-5">
+      <div class="card-body">
+        <div class="card-title mb-5">
+          <p>Categories</p>
+          <div class="form-control">
+            <label class="label cursor-pointer">
+              <span class="label-text mr-2">Mini stream</span>
+              <input
+                type="checkbox"
+                class="toggle toggle-primary"
+                v-model="miniStream"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div class="flex" role="group">
+          <button
+            type="button"
+            class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+            @click="changeCategory('gaming')"
+          >
+            Gaming
+          </button>
+
+          <button
+            type="button"
+            class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+            @click="changeCategory('desktop')"
+          >
+            Desktop
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div class="card shadow-xl bg-neutral w-full mb-5">
       <div class="card-body">
         <div class="card-title mb-5">OBS Scenes</div>
@@ -112,8 +89,6 @@ export default defineComponent({
         <div class="flex" role="group">
           <Toggle title="Change B&W filter" filterName="blackAndWhite" />
 
-          <Toggle title="Filto Ayame" filterName="filtroAyame" />
-
           <Toggle title="Change chroma filter" filterName="Chroma Key" />
         </div>
       </div>
@@ -147,3 +122,99 @@ export default defineComponent({
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import Toggle from "@/components/Toggle.vue";
+
+export default defineComponent({
+  //TODO: replace type any by specific type in data object
+  data(): any {
+    return {
+      categories: {
+        gaming: {
+          sourceName: "4K Video Capture",
+          visible: false,
+        },
+        desktop: {
+          sourceName: "Display Capture",
+          visible: true,
+        },
+      },
+      miniStream: false,
+    };
+  },
+
+  components: {
+    Toggle,
+  },
+
+  methods: {
+    changeCategory(categoryName: string) {
+      Object.keys(this.categories).map((key) => {
+        this.categories[key].visible = categoryName === key;
+      });
+      const data = {
+        instructions: {
+          setSceneItemProperties: [
+            this.categories["gaming"],
+            this.categories["desktop"],
+          ],
+          displaySource: [
+            { sourceName: "GroupMiniStreamCapture", visible: this.miniStream },
+          ],
+        },
+      };
+      this.axios
+        .post("http://localhost:8081/api/obs/change-items", data)
+        .then((response) => {
+          console.log(response.data);
+        });
+    },
+
+    changeScene(sceneName: string, mute = false) {
+      const data = {
+        instructions: {
+          setScene: sceneName,
+          mute: [
+            {
+              item: "Mic main",
+              status: mute,
+            },
+          ],
+        },
+      };
+      this.axios
+        .post("http://localhost:8081/api/obs/change-items", data)
+        .then((response) => {
+          console.log(response.data);
+        });
+    },
+    twitchChat(message: string) {
+      this.axios
+        .post("http://localhost:8081/api/obs/twitch-chat", { message })
+        .then((response) => {
+          console.log(response.data);
+        });
+    },
+    streamEnding() {
+      const data = {
+        instructions: {
+          setScene: "Stream ending",
+          mute: [
+            {
+              item: "Mic main",
+              status: true,
+            },
+          ],
+        },
+      };
+      this.axios
+        .post("http://localhost:8081/api/obs/change-items", data)
+        .then((response) => {
+          console.log(response.data);
+        });
+    },
+  },
+});
+</script>

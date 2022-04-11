@@ -1,3 +1,17 @@
+<template>
+  <div class="form-control">
+    <label class="label cursor-pointer">
+      <span class="label-text mr-2">{{ title }}</span>
+      <input
+        type="checkbox"
+        class="toggle toggle-primary"
+        v-model="toggleValue"
+        @change="toggleFilter"
+      />
+    </label>
+  </div>
+</template>
+
 <script lang="ts">
 import { defineComponent } from "vue";
 
@@ -14,7 +28,6 @@ export default defineComponent({
     toggleFilter() {
       const data = {
         instructions: {
-          setScene: "Main scene",
           setFilter: [
             {
               sourceName: "LogitechCamCroma",
@@ -34,17 +47,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<template>
-  <div class="form-control">
-    <label class="label cursor-pointer">
-      <span class="label-text">{{ title }}</span>
-      <input
-        type="checkbox"
-        class="toggle toggle-primary"
-        v-model="toggleValue"
-        @change="toggleFilter"
-      />
-    </label>
-  </div>
-</template>
