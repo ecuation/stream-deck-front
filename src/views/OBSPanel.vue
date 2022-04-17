@@ -159,9 +159,22 @@
 import { defineComponent } from "vue";
 import Toggle from "@/components/Toggle.vue";
 
+interface Category {
+  sourceName: string;
+  visible: boolean;
+}
+
+interface Categories {
+  categories: {
+    gaming: Category;
+    desktop: Category;
+  };
+  miniStream: boolean;
+}
+
 export default defineComponent({
-  //TODO: replace type any by specific type in data object
-  data(): any {
+  name: "OBSPanel",
+  data(): Categories {
     return {
       categories: {
         gaming: {
@@ -183,7 +196,8 @@ export default defineComponent({
 
   methods: {
     changeCategory(categoryName: string) {
-      Object.keys(this.categories).map((key) => {
+      const categories = Object.keys(this.categories) as ["gaming", "desktop"];
+      categories.map((key) => {
         this.categories[key].visible = categoryName === key;
       });
       const data = {
