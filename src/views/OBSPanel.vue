@@ -178,7 +178,7 @@ export default defineComponent({
     return {
       categories: {
         gaming: {
-          sourceName: "4K Video Capture",
+          sourceName: "COMPO Game catpture",
           visible: false,
         },
         desktop: {
@@ -207,7 +207,7 @@ export default defineComponent({
             this.categories["desktop"],
           ],
           displaySource: [
-            { sourceName: "GroupMiniStreamCapture", visible: this.miniStream },
+            { sourceName: "Compo MiniStreamCapture", visible: this.miniStream },
           ],
         },
       };
