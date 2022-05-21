@@ -1,36 +1,25 @@
 <template>
   <div class="w-full h-20 my-10">
+     
     <div class="card shadow-xl bg-neutral w-full mb-5">
       <div class="card-body">
-        <div class="card-title mb-5">
-          <p>Categories</p>
-          <div class="form-control">
-            <label class="label cursor-pointer">
-              <span class="label-text mr-2">Mini stream</span>
-              <input
-                type="checkbox"
-                class="toggle toggle-primary"
-                v-model="miniStream"
-              />
-            </label>
-          </div>
-        </div>
-
+        <div class="card-title mb-5">Gaming Scenes</div>
         <div class="flex" role="group">
+          
           <button
             type="button"
-            class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-            @click="changeCategory('gaming')"
+            class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+            @click="changeScene('[scene] LayoutGaming')"
           >
-            Gaming
+            Overlay
           </button>
 
           <button
             type="button"
-            class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-            @click="changeCategory('desktop')"
+            class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+            @click="changeScene('[scene] WideScreenGaming')"
           >
-            Desktop
+            WideScreen
           </button>
         </div>
       </div>
@@ -38,38 +27,22 @@
 
     <div class="card shadow-xl bg-neutral w-full mb-5">
       <div class="card-body">
-        <div class="card-title mb-5">OBS Scenes</div>
+        <div class="card-title mb-5">Static Scenes</div>
         <div class="flex" role="group">
           <button
             type="button"
             class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-l-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-            @click="changeScene('Starting soon', true)"
+            @click="changeScene('[scene] StartingSoon', true)"
           >
-            Starting Soon
+            Starting
           </button>
 
           <button
             type="button"
             class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-            @click="changeScene('Main scene')"
+            @click="changeScene('[scene] BeRightBack', true)"
           >
-            Main Scene
-          </button>
-
-          <button
-            type="button"
-            class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-            @click="changeScene('FullScreen Scene')"
-          >
-            Fullscreen Scene
-          </button>
-
-          <button
-            type="button"
-            class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-            @click="changeScene('Be right back', true)"
-          >
-            Be right back
+            BRB
           </button>
 
           <button
@@ -77,7 +50,30 @@
             class="py-2 px-4 text-sm font-medium text-gray-900 bg-white rounded-r-md border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
             @click="streamEnding()"
           >
-            Stream ending
+            Ending
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card shadow-xl bg-neutral w-full mb-5">
+      <div class="card-body">
+        <div class="card-title mb-5">Desktop Scenes</div>
+        <div class="flex" role="group">
+          <button
+            type="button"
+            class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+            @click="changeScene('[scene] LayoutDesktop')"
+          >
+            Overlay
+          </button>
+
+          <button
+            type="button"
+            class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+            @click="changeScene('[scene] WideScreenDesktop')"
+          >
+            WideScreen
           </button>
         </div>
       </div>
@@ -87,9 +83,9 @@
       <div class="card-body">
         <div class="card-title mb-5">OBS Filters</div>
         <div class="flex" role="group">
-          <Toggle title="Change B&W filter" filterName="blackAndWhite" />
-
-          <Toggle title="Change chroma filter" filterName="Chroma Key" />
+          <Toggle title="Change B&W filter" filterName="B&W" sourceName="LogitechBrioCam" />
+          <Toggle title="Change chroma filter" filterName="Chroma Key"  sourceName="LogitechBrioCam"/>
+          <Toggle title="Night DayZ" filterName="NightDayZ" sourceName="4KVideoCapture"/>
         </div>
       </div>
     </div>
@@ -115,7 +111,7 @@
             class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
             @click="twitchChat(`Comandos disponibles: !ninovimo`)"
           >
-            OBS commands
+            Commands
           </button>
 
           <button
@@ -123,7 +119,7 @@
             class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
             @click="twitchChat(`!reanimacion`)"
           >
-            Reanimacion
+            Fua
           </button>
 
           <button
@@ -139,7 +135,7 @@
             class="py-2 px-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
             @click="twitchChat(`!saludo`)"
           >
-            Saludo
+            Hi
           </button>
 
           <button
@@ -224,7 +220,7 @@ export default defineComponent({
           setScene: sceneName,
           mute: [
             {
-              item: "Mic main",
+              item: "Mic/Aux",
               status: mute,
             },
           ],
@@ -246,10 +242,10 @@ export default defineComponent({
     streamEnding() {
       const data = {
         instructions: {
-          setScene: "Stream ending",
+          setScene: "[scene] StreamEnding",
           mute: [
             {
-              item: "Mic main",
+              item: "Mic/Aux",
               status: true,
             },
           ],

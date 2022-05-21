@@ -22,15 +22,17 @@ export default defineComponent({
     };
   },
 
-  props: ["title", "filterName"],
+  props: ["title", "filterName", "sourceName"],
 
   methods: {
     toggleFilter() {
+      console.log('filter: ', this.sourceName);
+      
       const data = {
         instructions: {
           setFilter: [
             {
-              sourceName: "LogitechCamCroma",
+              sourceName: this.sourceName,
               filterName: this.filterName,
               filterEnabled: this.toggleValue,
             },
